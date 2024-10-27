@@ -9,7 +9,7 @@ export default function Card({ values, likedFunc }) {
 
   return (
     <div
-      className={`card card-compact max-w-72 shadow-xl my-3 ${
+      className={`card card-compact max-w-72 shadow-xl my-3 bg-base-100 ${
         visited ? "bg-green-300" : "bg-grey-300"
       }`}>
       <figure>

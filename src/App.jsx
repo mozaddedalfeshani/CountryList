@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Card from "./componets/card";
+import LikedCard from "./componets/LikedCard";
 
 function App() {
   const [data, setData] = useState([]);
@@ -11,6 +12,15 @@ function App() {
     setLikedDatas((prevLikedDatas) => [...prevLikedDatas, countryInfo]);
     console.log("Hey Save Liked Data running");
     console.log(countryInfo);
+  };
+
+  //remove liked values
+  const removeValue = (value) => {
+    setLikedDatas(
+      likedDatas.filter(
+        (filterValue) => filterValue.name.common === value.name.common
+      )
+    );
   };
 
   //update the added country
@@ -29,15 +39,18 @@ function App() {
   return (
     <div>
       <div className="container mx-auto">
-        <h2>Liked Countries</h2>
-        <div className="container grid grid-cols-3 gap-1">
+        <h2 className="text-white font-bold text-2xl">Liked Countries</h2>
+        <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {likedDatas.map((item) => (
-            <Card values={item} key={item.cca2}></Card>
+            <LikedCard
+              values={item}
+              key={item.cca2}
+              func={removeValue}></LikedCard>
           ))}
         </div>
 
         {/* All country List  */}
-        <h1 className="text-black font-black text-2xl">All Countries </h1>
+        <h1 className="text-white font-bold text-2xl">All Countries </h1>
         <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {data.map((items) =>
             //using .some() functions for looping all likedDatas json info
